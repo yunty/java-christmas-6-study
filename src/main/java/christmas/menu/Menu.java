@@ -35,6 +35,10 @@ public enum Menu {
         return this.price;
     }
 
+    public String menuName() {
+        return String.valueOf(menuName);
+    }
+
     public static Menu findByMenuName(String name) {
         return Arrays.stream(values())
                 .filter(mainMenu -> mainMenu.isSameMenu(name))
