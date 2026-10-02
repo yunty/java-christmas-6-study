@@ -20,6 +20,6 @@ public class WeekdayDiscount {
     }
     private static boolean canNotDiscount(int day){
         int getDay = day % 7;
-        return getDay < 4 ;
+        return getDay < 3 && getDay > 0;
     }
 }

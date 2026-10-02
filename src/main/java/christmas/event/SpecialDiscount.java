@@ -1,20 +1,17 @@
 package christmas.event;
 
-import christmas.menu.MenuCategory;
-import christmas.order.Orders;
-
 public class SpecialDiscount {
-    private static final int DEFALUT_DICOUNT_MONEY = 1_000;
+    private static final int DEFAULT_DISCOUNT_MONEY = 1_000;
 
     private SpecialDiscount(){}
 
-    public static int calculate(Orders orders, int day) {
-        if (canNotDiscount(day)) {
-            return 0;
+    public static int calculate(int day) {
+        if (canDiscount(day)) {
+            return DEFAULT_DISCOUNT_MONEY;
         }
-        return DEFALUT_DICOUNT_MONEY;
+        return 0;
     }
-    private static boolean canNotDiscount(int day){
+    private static boolean canDiscount(int day){
         int getDay = day % 7;
         return getDay == 3 || day == 25 ;
     }

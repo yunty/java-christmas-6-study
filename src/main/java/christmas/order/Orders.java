@@ -16,19 +16,21 @@ public class Orders {
         addOrder(splitOrders);
     }
 
-    public static Orders of(String orders){
+    public static Orders of(String orders) {
         return new Orders(orders);
     }
 
-    public int calculateTotalPrice(){
+    public int calculateTotalPrice() {
         return orderList.stream()
                 .mapToInt(Order::getTotalPrice)
                 .sum();
     }
-    public int countByMenuName(MenuCategory menuCategory){
-        return Math.toIntExact(orderList.stream()
+
+    public int countByMenuName(MenuCategory menuCategory) {
+        return orderList.stream()
                 .filter(order -> order.isSameCategory(menuCategory))
-                .count());
+                .mapToInt(Order::getCount)
+                .sum();
     }
 
     private void addOrder(String[] orders) {

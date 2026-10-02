@@ -20,6 +20,9 @@ public class Order {
     public boolean isSameCategory(MenuCategory menuCategory){
         return menu.isSameCategory(menuCategory);
     }
+    public int getCount(){
+        return count;
+    }
 
     public String showMyMenuName() {
         return this.menu.menuName();

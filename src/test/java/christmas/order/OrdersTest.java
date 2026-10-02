@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import christmas.exception.InputException;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class OrdersTest {
@@ -25,7 +24,7 @@ public class OrdersTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"양송이수프-1,양송이스프-1,초코케이크-1",
+    @ValueSource(strings = {"양송이수프-1,양송이수프-1,초코케이크-1",
             "레드와인-1,레드와인-1"})
     void 중복된_값이_들어가면_예외_발생(String input){
         assertThrows(InputException.class,
