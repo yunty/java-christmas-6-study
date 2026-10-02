@@ -8,12 +8,14 @@ import java.util.Set;
 
 
 public class Orders {
-    private final Set<Order> orderList = new HashSet<Order>();
+    private final Set<Order> orderList = new HashSet<>();
 
-    public Orders(String orders) {
+    private Orders(String orders) {
         String[] splitOrders = orders.split(",");
         addOrder(splitOrders);
-
+    }
+    public static Orders of(String orders){
+        return new Orders(orders);
     }
 
     private void addOrder(String[] orders) {

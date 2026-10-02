@@ -3,6 +3,7 @@ package christmas.order;
 import christmas.exception.ErrorMessage;
 import christmas.exception.InputException;
 import christmas.menu.Menu;
+import java.util.Objects;
 
 public class Order {
     private final Menu menu;
@@ -39,7 +40,22 @@ public class Order {
     private void inputValidate(String inputOrder) {
         String inputRegex = "[가-힣]+-[1-9][0-9]*";
         if (inputOrder.matches(inputRegex)) {
-            throw new InputException(ErrorMessage.NOT_MATCH_REGEX);
+            return;
         }
+        throw new InputException(ErrorMessage.NOT_MATCH_REGEX);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Order order = (Order) o;
+        return menu == order.menu;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(menu);
     }
 }
