@@ -3,6 +3,7 @@ package christmas.order;
 import christmas.exception.ErrorMessage;
 import christmas.exception.InputException;
 import christmas.menu.Menu;
+import christmas.menu.MenuCategory;
 import java.util.Objects;
 
 public class Order {
@@ -14,6 +15,10 @@ public class Order {
 
         this.menu = getMenuFromOrder(splitOrder);
         this.count = getCountFromOrder(splitOrder);
+    }
+
+    public boolean isSameCategory(MenuCategory menuCategory){
+        return menu.isSameCategory(menuCategory);
     }
 
     public String showMyMenuName() {

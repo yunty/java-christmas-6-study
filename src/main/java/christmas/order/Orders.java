@@ -2,6 +2,7 @@ package christmas.order;
 
 import christmas.exception.ErrorMessage;
 import christmas.exception.InputException;
+import christmas.menu.MenuCategory;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,13 +15,20 @@ public class Orders {
         String[] splitOrders = orders.split(",");
         addOrder(splitOrders);
     }
+
     public static Orders of(String orders){
         return new Orders(orders);
     }
+
     public int calculateTotalPrice(){
         return orderList.stream()
                 .mapToInt(Order::getTotalPrice)
                 .sum();
+    }
+    public int countByMenuName(MenuCategory menuCategory){
+        return Math.toIntExact(orderList.stream()
+                .filter(order -> order.isSameCategory(menuCategory))
+                .count());
     }
 
     private void addOrder(String[] orders) {

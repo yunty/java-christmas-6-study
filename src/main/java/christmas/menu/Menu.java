@@ -39,6 +39,10 @@ public enum Menu {
         return String.valueOf(menuName);
     }
 
+    public boolean isSameCategory(MenuCategory menuCategory){
+        return this.menuCategory.equals(menuCategory);
+    }
+
     public static Menu findByMenuName(String name) {
         return Arrays.stream(values())
                 .filter(mainMenu -> mainMenu.isSameMenu(name))
