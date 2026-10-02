@@ -1,8 +1,6 @@
 package christmas.exception;
 
 public enum ErrorMessage {
-
-
     NOT_MATCH_MENU("유효하지 않은 주문입니다. 다시 입력해 주세요."),
     NOT_MATCH_REGEX("유효하지 않은 주문입니다. 다시 입력해 주세요."),
     DUPLICATE_MENU("유요하지 않은 주문입니다. 다시 입력해 주세요.");

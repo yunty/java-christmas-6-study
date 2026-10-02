@@ -38,7 +38,7 @@ public class Order {
     }
 
     private void inputValidate(String inputOrder) {
-        String inputRegex = "[가-힣]+-[1-9][0-9]*";
+        String inputRegex = "[가-힣]+-[1-9]\\d*";
         if (inputOrder.matches(inputRegex)) {
             return;
         }

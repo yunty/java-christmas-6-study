@@ -17,6 +17,11 @@ public class Orders {
     public static Orders of(String orders){
         return new Orders(orders);
     }
+    public int calculateTotalPrice(){
+        return orderList.stream()
+                .mapToInt(Order::getTotalPrice)
+                .sum();
+    }
 
     private void addOrder(String[] orders) {
         Arrays.stream(orders)
