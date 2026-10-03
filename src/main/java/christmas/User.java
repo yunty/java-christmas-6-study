@@ -1,20 +1,23 @@
 package christmas;
 
-import christmas.event.UserDiscount;
+import christmas.event.Badge;
+import christmas.event.UserBenefit;
 import christmas.order.Orders;
 
 public class User {
     private int totalPrice;
     private Orders orders;
-    private UserDiscount totalDiscount;
+    private UserBenefit totalBenefit;
+    private Badge badge;
 
     private User(Orders orders, int day) {
         this.orders = orders;
         this.totalPrice = orders.calculateTotalPrice();
-        totalDiscount = UserDiscount.applyEvent(orders, day);
+        this.totalBenefit = UserBenefit.applyEvent(orders, day);
+        this.badge = Badge.of(totalBenefit.getDiscountAmount());
     }
     public int getTotalDiscount(){
-        return totalDiscount.getTotalDiscount();
+        return totalBenefit.getDiscountAmount();
     }
 
     public static User of(String userOrders, int day) {
