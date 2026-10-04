@@ -1,6 +1,8 @@
 package christmas.event;
 
+import christmas.menu.Menu;
 import christmas.menu.MenuCategory;
+import christmas.order.Order;
 import christmas.order.Orders;
 
 public enum BenefitType {
@@ -19,6 +21,7 @@ public enum BenefitType {
         boolean supports(Orders orders, int day) {
             return day >= EVENT_START_DAY && day <= EVENT_END_DAY;
         }
+
     },
     WEEKDAY("평일 할인", true) {
         final int DEFAULT_DISCOUNT_MONEY = 2_023;
@@ -50,6 +53,7 @@ public enum BenefitType {
             int getDay = day % 7;
             return getDay < 3 && getDay > 0;
         }
+
     },
     SPECIAL("특별 할인", true) {
         final int DEFAULT_DISCOUNT_MONEY = 1_000;
@@ -64,6 +68,7 @@ public enum BenefitType {
             int getDay = day % 7;
             return getDay == 3 || day == 25;
         }
+
     },
     FREE_GIVEN("증정 이벤트", false) {
         final int FREE_GIVEN_MINIMUM_AMOUNT = 120_000;
@@ -77,6 +82,11 @@ public enum BenefitType {
         @Override
         boolean supports(Orders orders, int day) {
             return orders.calculateTotalPrice() >= FREE_GIVEN_MINIMUM_AMOUNT;
+        }
+
+        @Override
+        public Order getFreeGivenOrder() {
+            return Order.ofMenuAndCount(Menu.CHAMPAGNE, 1);
         }
     };
 
@@ -97,6 +107,17 @@ public enum BenefitType {
 
     public boolean isPaymentDiscount(){
         return this.paymentDiscount;
+    }
+
+    public String getEventName() {
+        return eventName;
+    }
+    public boolean isNotPaymentDiscount(){
+        return this.paymentDiscount == false;
+    }
+
+    public Order getFreeGivenOrder() {
+        return Order.ofEmptyOrder();
     }
 
     abstract int calculateAmount(Orders orders, int day);

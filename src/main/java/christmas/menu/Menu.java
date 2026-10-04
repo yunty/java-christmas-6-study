@@ -19,7 +19,9 @@ public enum Menu {
 
     ZERO_COKE("제로콜라", 3_000, MenuCategory.DRINK),
     RED_WINE("레드와인", 60_000, MenuCategory.DRINK),
-    CHAMPAGNE("샴페인", 25_000, MenuCategory.DRINK);
+    CHAMPAGNE("샴페인", 25_000, MenuCategory.DRINK),
+
+    NONE("없음", 0, MenuCategory.NONE);
 
     final String menuName;
     final int price;
@@ -45,6 +47,7 @@ public enum Menu {
 
     public static Menu findByMenuName(String name) {
         return Arrays.stream(values())
+                .filter(menu -> menu != NONE)
                 .filter(mainMenu -> mainMenu.isSameMenu(name))
                 .findFirst()
                 .orElseThrow(() -> new InputException(ErrorMessage.NOT_MATCH_MENU));

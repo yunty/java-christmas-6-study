@@ -4,5 +4,6 @@ public enum MenuCategory {
     MAIN,
     DESERT,
     APPETIZER,
-    DRINK;
+    DRINK,
+    NONE;
 }

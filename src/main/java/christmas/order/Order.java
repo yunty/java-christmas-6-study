@@ -16,6 +16,16 @@ public class Order {
         this.menu = getMenuFromOrder(splitOrder);
         this.count = getCountFromOrder(splitOrder);
     }
+    private Order(Menu menu, int count){
+        this.menu = menu;
+        this.count = count;
+    }
+    public static Order ofMenuAndCount(Menu menu, int count){
+        return new Order(menu,count);
+    }
+    public static Order ofEmptyOrder(){
+        return new Order(Menu.NONE, 0);
+    }
 
     public boolean isSameCategory(MenuCategory menuCategory){
         return menu.isSameCategory(menuCategory);
@@ -37,7 +47,11 @@ public class Order {
     }
 
     private static int getCountFromOrder(String[] splitOrder) {
-        return Integer.parseInt(splitOrder[1]);
+        try {
+            return Integer.parseInt(splitOrder[1]);
+        } catch (NumberFormatException e) {
+            throw new InputException(ErrorMessage.INVALID_ORDER);
+        }
     }
 
     private String[] splitInputOrder(String inputOrder) {
@@ -47,7 +61,7 @@ public class Order {
 
     private void inputValidate(String inputOrder) {
         String inputRegex = "[가-힣]+-[1-9]\\d*";
-        if (inputOrder.matches(inputRegex)) {
+        if (inputOrder != null && inputOrder.matches(inputRegex)) {
             return;
         }
         throw new InputException(ErrorMessage.NOT_MATCH_REGEX);

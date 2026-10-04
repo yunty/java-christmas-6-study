@@ -18,7 +18,7 @@ public enum Badge {
     }
 
     public static Badge of(int amount) {
-        Arrays.stream(Badge.values())
+        return Arrays.stream(Badge.values())
                 .filter(badge -> badge.support(amount))
                 .max(Comparator.comparingInt(badge -> badge.minimumAmount))
                 .orElse(NONE);
@@ -26,5 +26,9 @@ public enum Badge {
 
     public boolean support(int amount) {
         return amount >= this.minimumAmount;
+    }
+
+    public String getBadgeType() {
+        return badgeType;
     }
 }

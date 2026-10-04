@@ -1,7 +1,10 @@
 package christmas.event;
 
+import christmas.order.Order;
 import christmas.order.Orders;
+import java.util.Collections;
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 
 public class UserBenefit {
@@ -38,6 +41,16 @@ public class UserBenefit {
 
     public int getBenefitAmount() {
         return benefitAmount;
+    }
+    public List<Order> getFreeGivenOrder(){
+        return benefits.keySet().stream()
+                .filter(BenefitType::isNotPaymentDiscount)
+                .map(BenefitType::getFreeGivenOrder)
+                .toList();
+    }
+
+    public Map<BenefitType, Integer> getBenefits() {
+        return Collections.unmodifiableMap(benefits);
     }
 
     private int sumBenefitAmount() {

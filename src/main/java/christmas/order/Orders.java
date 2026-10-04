@@ -12,8 +12,26 @@ public class Orders {
     private final Set<Order> orderList = new HashSet<>();
 
     private Orders(String orders) {
-        String[] splitOrders = orders.split(",");
+        if (orders == null || orders.isBlank()) {
+            throw new InputException(ErrorMessage.INVALID_ORDER);
+        }
+        String[] splitOrders = orders.split(",", -1);
         addOrder(splitOrders);
+        validateOrderCount();
+        validateNotOnlyDrinks();
+    }
+
+    private void validateOrderCount() {
+        long count = orderList.stream().mapToLong(Order::getCount).sum();
+        if (count > 20) {
+            throw new InputException(ErrorMessage.INVALID_ORDER);
+        }
+    }
+
+    private void validateNotOnlyDrinks() {
+        if (orderList.stream().allMatch(order -> order.isSameCategory(MenuCategory.DRINK))) {
+            throw new InputException(ErrorMessage.INVALID_ORDER);
+        }
     }
 
     public static Orders of(String orders) {
@@ -32,6 +50,9 @@ public class Orders {
                 .mapToInt(Order::getCount)
                 .sum();
     }
+    public Set<Order> getOrderList(){
+        return new HashSet<>(orderList);
+    }
 
     private void addOrder(String[] orders) {
         Arrays.stream(orders)
@@ -46,5 +67,6 @@ public class Orders {
         }
         return order;
     }
+
 
 }
